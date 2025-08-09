@@ -1,3 +1,14 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-# Add your commands here
+RUN apt update && apt install -y g++ \
+    && rm -rf /var/lib/apt/lists/*  
+
+WORKDIR /app
+
+COPY src/ /app/src
+
+RUN g++ /app/src/add.cpp -o /app/add 
+
+RUN g++ /app/src/mul.cpp -o /app/mul 
+
+CMD ["/bin/bash"]
